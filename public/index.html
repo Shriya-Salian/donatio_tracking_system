@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Donation Tracker</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">My Donation Tracker</a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="#" class="navbar-link">Home</a></li>
+                <li class="navbar-item"><a href="login.html" class="navbar-link">Donor Login/Register</a></li>
+                <li class="navbar-item"><a href="#" class="navbar-link">Services</a></li>
+                <li class="navbar-item"><a href="#about-us" class="navbar-link">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="slideshow-container">
+        <img class="nature" src="images/donate1.jpg" width="100%" height="300px">
+        <img class="nature" src="images/donate2.webp" width="100%" height="300px">
+        <img class="nature" src="images/donatefood3.jpg" width="100%" height="300px">
+    </div>
+   
+    <div class="w3-row custom-card-container">
+        <div class="custom-card">
+            <img src="images/childhelp.jpeg" alt="Help the Child" class="card-image">
+            <div class="card-content">
+                <h2 class="card-title">Help the Child</h2>
+                <p class="card-text">This is the brief description about the child help so you can donate and help the child to get good education, shelter, and get the needy supplies.</p>
+                <a href="#" class="card-button">Donate</a>
+            </div>
+        </div>
+        <div class="custom-card">
+            <img src="images/education.jpg" alt="Education" class="card-image">
+            <div class="card-content">
+                <h2 class="card-title">Education</h2>
+                <p class="card-text">This is the brief description about the child help so you can donate and help the child to get good education, shelter, and get the needy supplies.</p>
+                <a href="#" class="card-button">Donate</a>
+            </div>
+        </div>
+        <div class="custom-card">
+            <img src="images/food.jpg" alt="Food" class="card-image">
+            <div class="card-content">
+                <h2 class="card-title">Food</h2>
+                <p class="card-text">This is the brief description about the child help so you can donate and help the child to get good education, shelter, and get the needy supplies.</p>
+                <a href="#" class="card-button">Donate</a>
+            </div>
+        </div>
+    </div>
+    <footer id="about-us">
+       <p>Contact Us: donationtrack01@gmail.com</p> 
+    </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let slideIndex = 0;
+        showSlides();
+    
+        function showSlides() {
+            let slides = document.getElementsByClassName("nature");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex - 1].style.display = "block";  
+            setTimeout(showSlides, 1500); // Change image every 1.5 seconds
+        }
+    });
+    </script>
+</body>
+</html>
