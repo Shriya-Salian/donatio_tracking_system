@@ -9,11 +9,19 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "body-parser": "^1.20.2",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "express-session": "^1.18.0",
-    "mysql2": "^3.10.3"
-  }
+    "mysql2": "^3.14.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shriya-Salian/donatio_tracking_system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Shriya-Salian/donatio_tracking_system/issues"
+  },
+  "homepage": "https://github.com/Shriya-Salian/donatio_tracking_system#readme",
+  "description": ""
 }

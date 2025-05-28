@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: '',
-    database: 'mydatabase'
+    password: 'root123',
+    database: 'login_database'
 });
 
 connection.connect(err => {
@@ -31,20 +31,26 @@ connection.connect(err => {
 
 // Handle registration requests
 app.post('/register', (req, res) => {
-    const { first, lName, email, password } = req.body;
-    const sql = 'INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)';
-    connection.query(sql, [first, lName, email, password], (err, result) => {
-        if (err) return res.status(500).send('Error: ' + err.message);
+    const { fName, lName, email, passwords } = req.body;
+    const sql = 'INSERT INTO users (fName, lName, email, passwords) VALUES (?, ?, ?, ?)';
+    connection.query(sql, [fName, lName, email, passwords], (err, result) => {
+        if (err) {
+            console.error('Error inserting data:', err);
+            return res.status(500).send('Error inserting data into the database');
+        }
         res.redirect('/donor_home.html');
     });
 });
 
 // Handle login requests
 app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    const sql = 'SELECT * FROM users WHERE email = ? AND password = ?';
-    connection.query(sql, [email, password], (err, results) => {
-        if (err) return res.status(500).send('Error: ' + err.message);
+    const { email, passwords } = req.body;
+    const sql = 'SELECT * FROM users WHERE email = ? AND passwords = ?';
+    connection.query(sql, [email, passwords], (err, results) => {
+        if (err) {
+            console.error('Error fetching user:', err);
+            return res.status(500).send('Error: ' + err.message);
+        }
         if (results.length > 0) {
             // Redirect to donor_home.html if login is successful
             res.redirect('/donor_home.html');
@@ -54,7 +60,8 @@ app.post('/login', (req, res) => {
         }
     });
 });
-//handle donation form
+
+// Handle donation form
 app.post('/donate_form', (req, res) => {
     const { name, age, phone, address, campaign } = req.body;
     const sql = 'INSERT INTO donate_form (name, age, phone, address, campaign) VALUES (?, ?, ?, ?, ?)';
@@ -64,24 +71,27 @@ app.post('/donate_form', (req, res) => {
             return res.status(500).send('Error inserting data into the database');
         }
         res.send('Donation is Successful Thank you for donation');
-        res.redirect('/donor_home.html')
+        res.redirect('/donor_home.html');
     });
 });
-//tracking the donation
-app.get('/track_donation',(req,res)=>{
+
+// Tracking donations
+app.get('/track_donation', (req, res) => {
     const sql = 'SELECT * FROM donate_form';
-    connection.query(sql,(err,results)=>{
-        if(err){
-            console.err('Error fetching donations',err);
+    connection.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error fetching donations:', err);
             return res.status(500).send('Error fetching donations');
         }
         res.json(results);
     });
 });
-app.get('/track_donation.html',(req,res)=>{
-    res.sendFile(path.join(__dirname,'track_donation.html'));
+
+app.get('/track_donation.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'track_donation.html'));
 });
+
 // Start the server
 app.listen(port, () => {
-console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on http://localhost:${port}`);
 });
